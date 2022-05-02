@@ -15,3 +15,17 @@ var machinelink = ml5.imageClassifier("https://teachablemachine.withgoogle.com/m
 function modelloaded(){      
     console.log("Model Loaded");
 }
+function result(){
+    var img = document.getElementById("photo");
+    machinelink.classify(img, getphoto);
+}
+function getphoto(error,results){
+    if(error){
+        console.error(error);
+    }
+    else{
+        console.log(results);
+        document.getElementById("objectdisplay").innerHTML = results[0].label;
+        document.getElementById("accuracydisplay").innerHTML = (results[0].confidence*100).toFixed(2) + " %";
+    }
+}
